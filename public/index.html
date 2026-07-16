@@ -111,10 +111,10 @@
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
           var feed = document.getElementById("feed_container");
-          feed.innerHTML = "";
+          feed.innerHTML = ""
           for (let i = 0; i < resposta.length; i++) {
             var item = resposta[i];
-
+            //console.log(item)
             var divitem = document.createElement("div");
             var spanID = document.createElement("span");
             var spanTitulo = document.createElement("span");
@@ -123,7 +123,7 @@
             var spanAutor = document.createElement("span");
             var spanGenero = document.createElement("span");
             var spanEstoque = document.createElement("span")
-            
+
             var divButtons = document.createElement("div");
             var btnEditar = document.createElement("button");
             var btnDeletar = document.createElement("button");
@@ -133,8 +133,10 @@
             spanPrecoCompra.innerHTML = "Preço de Compra (R$): <b>" + item.precoCompra + "<b>";
             spanPrecoVenda.innerHTML = "Preço de Venda (R$): <b>" + item.precoVenda + "<b>";
             spanAutor.innerHTML = "Autor do Livro: <b>" + item.nomeAutor + "<b>";
-            spanGenero.innerHTML = "Gênero: <b>" + item.nomeGenero + "<b>";
-            spanEstoque.innerHTML = "Estoque: <b>" + item.Estoque + "<b>";
+             spanGenero.innerHTML = "Gênero: <b>" + item.nomeGenero + "<b>";
+            //spanGenero.innerHTML = "Gênero: <b>" + item.titulo + "<b>";
+              //console.log("teste")
+            spanEstoque.innerHTML = "Estoque: <b>" + item.estoque + "<b>";
 
             btnEditar.innerHTML = "Editar";
             btnDeletar.innerHTML = "Deletar";
@@ -146,6 +148,8 @@
             spanPrecoCompra.className = "publicacao-precoCompra";
             spanPrecoVenda.className = "publicacao-precoVenda";
             spanGenero.className = "publicacao-genero";
+            spanEstoque.className = "publicacao-genero";
+
 
             divButtons.className = "div-buttons"
 
@@ -163,6 +167,8 @@
             divitem.appendChild(spanAutor);
             divitem.appendChild(spanPrecoCompra);
             divitem.appendChild(spanPrecoVenda);
+            divitem.appendChild(spanEstoque);
+
             divitem.appendChild(divButtons);
             divButtons.appendChild(btnEditar);
             divButtons.appendChild(btnDeletar);

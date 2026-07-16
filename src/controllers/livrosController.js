@@ -23,7 +23,7 @@ function cadastrar(req, res) {
     var precoCompra = req.body.precoCompra;
     var precoVenda = req.body.precoVenda;
     var estoque = req.body.estoque
-
+    console.log(req.body)
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
     } else if (fkAutor == undefined) {
@@ -34,8 +34,11 @@ function cadastrar(req, res) {
         res.status(400).send("O preço de venda está indefinido!");
     } else if (fkGenero == undefined) {
         res.status(400).send("O gênero está indefinido!");
-    } else {
-        livrosModel.cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda)
+    } else if (estoque == undefined){
+        res.status(400).send("o estoque está indefinido")
+    }
+    else {
+        livrosModel.cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda, estoque)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -90,9 +93,25 @@ function deletar(req, res) {
         );
 }
 
+
+function grafico(req, res) {
+    livrosModel.grafico().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     listar,
     cadastrar,
     editar,
-    deletar
+    deletar,
+    grafico
 }

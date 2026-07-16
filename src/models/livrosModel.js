@@ -1,3 +1,4 @@
+const { ver_grafico } = require("../controllers/livrosController");
 var database = require("../database/config");
 
 function listar() {
@@ -18,8 +19,7 @@ estoque
 }
 
 
-
-function cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda,estoque) {
+function cadastrar(titulo, fkAutor, fkGenero, precoCompra, precoVenda, estoque) {
 
     var instrucaoSql = `
         INSERT INTO livro (titulo, fkAutor, fkGenero, precoCompra, precoVenda, estoque) VALUES ('${titulo}', '${fkAutor}', '${fkGenero}', '${precoCompra}', '${precoVenda}', '${estoque}');
@@ -41,8 +41,20 @@ function editar(novoPrecoCompra, novoPrecoVenda, id) {
 }
 
 
+function grafico() {
+
+    var instrucaoSql = `
+   select genero.nome, count(livro.titulo) as qtd_livro from genero
+   join livro on genero.id = livro.fkGenero group by genero.nome;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     listar,
     cadastrar,
-    editar
+    editar,
+    grafico
 }

@@ -151,34 +151,40 @@
             titulo: form_postagem.titulo.value,
             fkGenero: form_postagem.fkGenero_lista.value,
             fkAutor: form_postagem.fkAutor_lista.value,
-            precoCompra: form_postagem.precoCompra.value,
+            precoCompra:Number(form_postagem.precoCompra.value),
             // precoVenda: form_postagem.precoVenda.value
             precoVenda: 0,
-            estoque : form_postagem.qtd_estoque.value,
+            estoque: Number(form_postagem.qtd_estoque.value)
         }
+        console.log("*****")
+        console.log(corpo)
+        console.log("*****")
 
-        if (corpo.precoCompra >= 100 && (corpo.fkGenero == 'horro' || corpo.fkGenero == 'romance')) {
 
-            let desconto = (corpo.precoCompra / 100) * 22.5
+        let desconto = 0
 
-            corpo.precoVenda = corpo.precoVenda + desconto
-            return;
+        if (corpo.precoCompra >=100 && (corpo.fkGenero =="1"||corpo.fkGenero =="2")) {
+
+                desconto = ((corpo.precoCompra / 100)*22.5)
+
+            corpo.precoVenda = corpo.precoCompra + desconto
+            
 
             console.log(`ATUALIZEI O PREÇO`)
 
-        } else if (precoCompra <= 50 && (corpo.fkGenero == 'poesia' || corpo.fkGenero == 'horro')) {
+        } else if (precoCompra <= 50 && (corpo.fkGenero == "3" || corpo.fkGenero == "1")) {
 
-            let desconto = (corpo.precoCompra / 100) * 25
+                desconto = (corpo.precoCompra / 100) * 25
 
             corpo.precoVenda = corpo.precoVenda + desconto
-            return
+        
         }
-        else if (corpo.precoCompra > 50 && corpo.precoCompra < 100 && corpo.fkGenero == 'fantasia') {
+        else if (corpo.precoCompra > 50 && corpo.precoCompra < 100 && corpo.fkGenero == "4") {
 
-            let desconto = (corpo.precoCompra / 100) * 27.5
+             desconto = (corpo.precoCompra / 100) * 27.5
 
             corpo.precoVenda = corpo.precoVenda + desconto
-            return
+        
         }
 
 

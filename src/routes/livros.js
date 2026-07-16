@@ -15,4 +15,7 @@ router.put("/editar/:id", function (req, res) {
     livrosController.editar(req, res);
 });
 
+router.get("/grafico", function (req, res) {
+    livrosController.grafico(req, res);
+});
 module.exports = router;
